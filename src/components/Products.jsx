@@ -4,7 +4,7 @@ function Products(props) {
 	const [products, setProducts] = useState([{name: "", amount: 0, price: 0, editable: true}]);
 
 	useEffect(() => {
-		console.log(products, 'SE ACTUALIZAN LOS PRODUCTOS');
+		props.update(products);
 	}, [products]);
 
 	const updateProduct = (index, key, value) => {
@@ -22,14 +22,12 @@ function Products(props) {
 	const newRow = (index) => {
 		updateProduct(index, "editable", false);
 		setProducts(prev => [...prev, {name: "", amount: 0, price: 0, editable: true}]);
-		props.update(products);
 	}
 
 	const delRow = (index) => {
 		let copy = [...products];
 		copy.splice(index, 1);
 		setProducts(copy);
-		props.update(copy.slice(0, -1));
 	}
 
 	const parseSubtotal = (price = 0, amount = 0) => {

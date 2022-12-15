@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
+import PdfTmpl from '../../components/PdfTmpl.jsx';
 import Products from '../../components/Products.jsx';
+import { PDFViewer } from '@react-pdf/renderer';
 
 function Builder() {
 	const [data, setData] = useState(
 		{pro:{
-			name: "",
-			dni: "",
-			address: "",
-			city: "",
-			province: "",
-			cp: "",
+			name: "Antonio Robles Martinez",
+			dni: "2342345J",
+			address: "Calle granada x",
+			city: "Almaeira",
+			province: "Almeria",
+			cp: "00934",
 		},
 		cus:{
 			name: "",
@@ -21,7 +23,8 @@ function Builder() {
 		},
 		products:[],
 		base: "0.00",
-		iva: 0
+		iva: 0,
+		date: ""
 	});
 	const [crrDate, setCrrDate] = useState();
 
@@ -43,18 +46,16 @@ function Builder() {
 
 		return base.toFixed(2);
 	}
+
+	const handleDate = (e) => setData((prev) => ({...prev, date: e.target.value}));
 	
 	useEffect(() => {
 		let date = new Date();
-		setCrrDate(
-			date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate()
-		)
+		date = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+		setData((prev) => ({...prev, date: date}));
 	}, []);
 
-	useEffect(() => {
-		console.log(data)
-	}, [data]);
-
+	/** Styles for inputs */
 	const inputStyle = "bg-white text-gray-700 text-sm ring-2 ring-gray-100 focus:ring-blue-400 transition duration-300 outline-none rounded mt-1 block py-1.5 px-4";
 	const labelStyle = "font-medium text-sm pl-2 -mb-1 text-gray-800 w-1/3";
 	const inputBoxStyle = "flex items-baseline gap-4";
@@ -67,7 +68,10 @@ function Builder() {
 						{/* header */}
 						<div className="flex items-baseline gap-2">
 							<label htmlFor="date" className="font-semibold pl-2 whitespace-nowrap">Fecha factura:</label>
-							<input id="date" name="date" type="date" defaultValue={crrDate} className={ inputStyle } />
+							<input id="date" name="date" type="date" 
+								value={data.date} 
+								onChange={ handleDate }
+								className={ inputStyle } />
 						</div>
 					</div>
 					{/* provider and client info */}
@@ -209,8 +213,12 @@ function Builder() {
 			<div className="w-full mx-auto max-w-4xl pt-8">
 				<button className="bg-green-100 hover:bg-green-200 text-green-600 px-4 py-2 font-semibold text-lg rounded-xl w-full">Generar PDF</button>
 			</div>
+			<div className="w-full max-w-4xl h-[90vh] mx-auto pt-4">
+				<PDFViewer style={{ width: "100%", height: "100%" }}>
+					<PdfTmpl data={ data }></PdfTmpl>
+				</PDFViewer>
+			</div>
 		</div>
-		// setData((prev => ({...prev, products: data})))
 	)
 }
 
