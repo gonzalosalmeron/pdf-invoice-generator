@@ -6,12 +6,12 @@ import { PDFViewer } from '@react-pdf/renderer';
 function Builder() {
 	const [data, setData] = useState(
 		{pro:{
-			name: "Antonio Robles Martinez",
-			dni: "2342345J",
-			address: "Calle granada x",
-			city: "Almaeira",
-			province: "Almeria",
-			cp: "00934",
+			name: "",
+			dni: "",
+			address: "",
+			city: "",
+			province: "",
+			cp: "",
 		},
 		cus:{
 			name: "",

@@ -78,6 +78,29 @@ const styles = StyleSheet.create({
   },
 	w25: {
 		width: '25%',
+	},
+	subtotal: {
+		width: '33%', 
+		borderWidth: 1, 
+		borderColor: 'grey',
+		marginTop: 30,
+		fontSize: 10,
+	},
+	subtotalRow: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		opacity: 0.6,
+		paddingHorizontal: 8,
+		paddingVertical: 3
+	},
+	subtotalRowTotal: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		opacity: 0.6,
+		marginTop: 2,
+		paddingVertical: 3,
+		paddingHorizontal: 8,
+		backgroundColor: '#E4E4E4',
 	}
 });
 
@@ -98,10 +121,10 @@ const MyDocument = (props) => (
 				</View>
 				<View style={{ width: '50%' }}>
 					<Text style={{ opacity: 0.55, fontSize: 11.5, paddingBottom: 4 }}>Datos del cliente:</Text>
-				  <Text style={{ paddingBottom: '10px', opacity: 0.6, fontFamily: 'Helvetica-Bold' }}>{ props.data.pro.name }</Text>
-				  <Text style={ styles.text }>CIF/NIF: { props.data.pro.dni }</Text>
-				  <Text style={ styles.text }>{ props.data.pro.address }</Text>
-				  <Text style={ styles.text }>{ props.data.pro.cp } - { props.data.pro.city } ({ props.data.pro.province })</Text>
+				  <Text style={{ paddingBottom: '10px', opacity: 0.6, fontFamily: 'Helvetica-Bold' }}>{ props.data.cus.name }</Text>
+				  <Text style={ styles.text }>CIF/NIF: { props.data.cus.dni }</Text>
+				  <Text style={ styles.text }>{ props.data.cus.address }</Text>
+				  <Text style={ styles.text }>{ props.data.cus.cp } - { props.data.cus.city } ({ props.data.cus.province })</Text>
 				</View>
 			</View>
 			<View style={styles.table}> 
@@ -136,6 +159,22 @@ const MyDocument = (props) => (
 					</View> 
 				))}
       </View>
+			<View style={{ flexDirection: 'row', justifyContent: 'flex-end', fontSize: '12' }}>
+				<View style={ styles.subtotal }>
+					<View style={ styles.subtotalRow }>
+						<Text style={{ fontFamily: 'Helvetica-Bold' }}>Base imponible:</Text>
+						<Text>{ props.data.base } €</Text>
+					</View>
+					<View style={ styles.subtotalRow }>
+						<Text style={{ fontFamily: 'Helvetica-Bold' }}>IVA ({ props.data.iva * 100 }%):</Text>
+						<Text>{ (props.data.iva * props.data.base).toFixed(2) } €</Text>
+					</View>
+					<View style={ styles.subtotalRowTotal }>
+						<Text style={{ fontFamily: 'Helvetica-Bold' }}>Total:</Text>
+						<Text>{ (parseFloat(props.data.iva * props.data.base) + parseFloat(props.data.base)).toFixed(2) } €</Text>
+					</View>
+				</View>
+			</View>
 		</Page>
 	</Document>
 );
