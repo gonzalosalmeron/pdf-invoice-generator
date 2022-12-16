@@ -5,12 +5,29 @@
     <link rel="icon" type="image/svg+xml" href="/pdf-invoice-generator/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Do you need to create an invoice and export it into PDF? This tool will help you to generate invoices and export it into PDF. This app its so simple and is developed by Gonzalo Salmerón Robles">
+    <meta name="theme-color" content="#000000" />
+    <link rel="manifest" href="/pdf-invoice-generator/manifest.json" />
     <title>Pdf invoice generator</title>
-    <script type="module" crossorigin src="/pdf-invoice-generator/assets/index-44039e76.js"></script>
-    <link rel="stylesheet" href="/pdf-invoice-generator/assets/index-698f6dc3.css">
+    <script type="module" crossorigin src="/pdf-invoice-generator/assets/index-534e9ac4.js"></script>
+    <link rel="stylesheet" href="/pdf-invoice-generator/assets/index-f94c42b3.css">
   </head>
   <body>
     <div id="root"></div>
     
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('worker.js').then(function(registration) {
+            console.log('Worker registration successful', registration.scope);
+          }, function(err) {
+            console.log('Worker registration failed', err);
+          }).catch(function(err) {
+            console.log(err);
+          });
+        });
+      } else {
+        console.log('Service Worker is not supported by browser.');
+      }
+    </script>
   </body>
 </html>
