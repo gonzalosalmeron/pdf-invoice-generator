@@ -61,7 +61,7 @@ function Builder() {
 	const inputBoxStyle = "flex items-baseline gap-4";
 
 	return (
-		<div className="min-h-screen bg-gray-50 py-20">
+		<div className="min-h-screen bg-gray-50 md:py-20">
 			<div className="bg-white w-full max-w-4xl min-h-[1200px] mx-auto px-16 py-20 flex flex-col justify-between">
 				<div>
 					<div className="flex justify-end">
