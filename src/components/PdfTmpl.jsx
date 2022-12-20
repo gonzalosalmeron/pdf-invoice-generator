@@ -1,6 +1,5 @@
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/renderer';
-import { data } from 'autoprefixer';
 
 // Create styles
 const styles = StyleSheet.create({
@@ -15,7 +14,22 @@ const styles = StyleSheet.create({
 		padding: 10,
 		flexGrow: 1
 	},
-	date: {
+	header: {
+		flexDirection: 'column',
+		alignItems: 'flex-end',
+	},
+	numfactura: {
+		flexDirection: 'row',
+		justifyContent: 'flex-start',
+		fontSize: 13,
+		paddingHorizontal: 8,
+		paddingVertical: 8,
+		marginBottom: '10px',
+		borderWidth: 1.3,
+		borderColor: 'grey',
+		opacity: 0.7
+	},
+	flexrow: {
 		flexDirection: 'row',
 		justifyContent: 'flex-end',
 		fontSize: 11,
@@ -108,9 +122,15 @@ const styles = StyleSheet.create({
 const MyDocument = (props) => (
 	<Document>
 		<Page size='A4' style={styles.page}>
-			<View style={styles.date}>
-				<Text style={{ fontWeigth: 100, opacity: 0.55 }}>Fecha: </Text>
-				<Text style={{ opacity: 0.65, fontFamily: 'Helvetica-Bold' }}>{ props.data.date }</Text>
+			<View style={styles.header}>
+				<View style={styles.numfactura}>
+					<Text style={{ fontFamily: 'Helvetica-Bold' }}>FACTURA Nº: </Text>
+					<Text style={{ fontFamily: 'Helvetica-Bold', paddingLeft: 3 }}>{ props.data.num }</Text>
+				</View>
+				<View style={styles.flexrow}>
+					<Text style={{ fontWeigth: 100, opacity: 0.55 }}>Fecha: </Text>
+					<Text style={{ opacity: 0.65, fontFamily: 'Helvetica-Bold' }}>{ props.data.date }</Text>
+				</View>
 			</View>
 			<View style={styles.proCus}>
 				<View style={{ width: '50%', paddingTop: 16.5 }}>

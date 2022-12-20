@@ -36,6 +36,7 @@ function Products(props) {
 		return result;
 	}
 
+	/** Styles for inputs */
 	const inputStyle = "bg-white text-gray-700 text-sm ring-2 ring-gray-100 focus:ring-blue-400 transition duration-300 outline-none rounded mt-1 block py-1.5 px-4 w-full";
 
   return (
